@@ -1,0 +1,194 @@
+{% extends "base.html" %}
+
+{% block title %}Home | GTU AI Student Exam Readiness System{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+
+    <!-- Hero Section -->
+    <div class="row align-items-center gy-5 py-4">
+        <div class="col-lg-7">
+            <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill px-3 py-2 fw-semibold mb-3">
+                <i class="fa-solid fa-wand-magic-sparkles me-1"></i> AI-Powered Educational Analytics
+            </span>
+            <h1 class="display-4 fw-bold text-dark lh-sm mb-3">
+                Predict GTU Exam Readiness Before Final Papers
+            </h1>
+            <p class="lead text-muted-custom mb-4 pe-lg-4">
+                Evaluate pass probability, expected GTU grades (AA to FF), risk levels, and receive domain-tailored topic recommendations across 190+ GTU subjects.
+            </p>
+            <div class="d-flex flex-wrap gap-3">
+                <a href="{{ url_for('predict_page') }}" class="btn btn-saas-primary btn-lg">
+                    <i class="fa-solid fa-bolt"></i> Predict Readiness Now
+                </a>
+                <a href="{{ url_for('about_page') }}" class="btn btn-saas-secondary btn-lg">
+                    <i class="fa-solid fa-book-open"></i> Architecture & ML Docs
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <div class="saas-card text-center p-4 border-primary border-opacity-25 bg-white shadow-sm">
+                <div class="badge bg-success-subtle text-success px-3 py-1 rounded-pill mb-3 fw-semibold">
+                    <i class="fa-solid fa-circle-check me-1"></i> Real-time AI Pipeline
+                </div>
+                <h4 class="fw-bold mb-3">Instant Performance Audit</h4>
+                <div class="p-3 bg-light rounded-3 text-start mb-3 border">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span class="small fw-semibold text-muted">Pass Probability</span>
+                        <span class="fw-bold text-success">94.2%</span>
+                    </div>
+                    <div class="progress mb-2" style="height: 8px;">
+                        <div class="progress-bar bg-success" style="width: 94%;"></div>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center small">
+                        <span>Expected Grade: <strong class="badge bg-success text-white">AA</strong></span>
+                        <span class="text-muted">Confidence: 91.5%</span>
+                    </div>
+                </div>
+                <div class="p-3 bg-primary-subtle text-primary rounded-3 text-start small fw-medium">
+                    <i class="fa-solid fa-lightbulb me-1"></i> Tailored Revision: Deadlocks, Scheduling & Semaphore Synchronization.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Statistics Section -->
+    <div class="row g-3 py-4 my-3 text-center">
+        <div class="col-6 col-md-3">
+            <div class="saas-card py-3">
+                <h2 class="fw-bold text-primary mb-1">6</h2>
+                <div class="small text-muted-custom fw-medium">Engineering Departments</div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="saas-card py-3">
+                <h2 class="fw-bold text-primary mb-1">190+</h2>
+                <div class="small text-muted-custom fw-medium">GTU Core Subjects</div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="saas-card py-3">
+                <h2 class="fw-bold text-success mb-1">7,000</h2>
+                <div class="small text-muted-custom fw-medium">Synthetic Student Records</div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="saas-card py-3">
+                <h2 class="fw-bold text-primary mb-1">3</h2>
+                <div class="small text-muted-custom fw-medium">Evaluation Stages</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Key Features Section -->
+    <div class="py-4">
+        <div class="text-center max-w-2xl mx-auto mb-5">
+            <h2 class="fw-bold">Platform Capabilities</h2>
+            <p class="text-muted-custom">Designed for GTU students and faculty to pinpoint academic vulnerabilities early.</p>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="saas-card saas-card-hover h-100">
+                    <div class="dept-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                    <h5 class="fw-bold">Direct GTU Grade Prediction</h5>
+                    <p class="text-muted-custom small mb-0">
+                        Direct multi-class classification model predicting official GTU grades (AA, AB, BB, BC, CC, CD, DD, FF) without intermediate manual binning.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="saas-card saas-card-hover h-100">
+                    <div class="dept-icon"><i class="fa-solid fa-chart-pie"></i></div>
+                    <h5 class="fw-bold">Pass Probability %</h5>
+                    <p class="text-muted-custom small mb-0">
+                        Computes calibrated probability metric estimating the precise likelihood of clearing the selected GTU course paper.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="saas-card saas-card-hover h-100">
+                    <div class="dept-icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+                    <h5 class="fw-bold">Explainable AI Analysis</h5>
+                    <p class="text-muted-custom small mb-0">
+                        Breaks down positive and negative contributing factors (Attendance, SPI, Study Hours, Mid Marks, Backlogs) explaining why the prediction was made.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="saas-card saas-card-hover h-100">
+                    <div class="dept-icon"><i class="fa-solid fa-book-bookmark"></i></div>
+                    <h5 class="fw-bold">Subject-Specific Recommendations</h5>
+                    <p class="text-muted-custom small mb-0">
+                        Generates domain-tailored revision topics specifically mapped to the chosen GTU subject syllabus.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="saas-card saas-card-hover h-100">
+                    <div class="dept-icon"><i class="fa-solid fa-list-check"></i></div>
+                    <h5 class="fw-bold">Stage-Aware Dynamic Evaluation</h5>
+                    <p class="text-muted-custom small mb-0">
+                        Supports 3 dynamic assessment stages: Before Mid-1, After Mid-1, and After Mid-2 with automatic form field updates.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="saas-card saas-card-hover h-100">
+                    <div class="dept-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                    <h5 class="fw-bold">Prediction History & Logs</h5>
+                    <p class="text-muted-custom small mb-0">
+                        Persists prediction sessions in SQLite database allowing students to track progress across semester stages.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Workflow Section -->
+    <div class="py-5 my-3">
+        <div class="saas-card bg-light border p-4 p-md-5 text-center">
+            <h3 class="fw-bold mb-4">Simple 6-Step Workflow</h3>
+            <div class="row g-3 justify-content-center">
+                <div class="col-md-2 col-6">
+                    <div class="p-3 bg-white rounded-3 border">
+                        <div class="fw-bold text-primary mb-1">1</div>
+                        <div class="small fw-semibold">Department</div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-6">
+                    <div class="p-3 bg-white rounded-3 border">
+                        <div class="fw-bold text-primary mb-1">2</div>
+                        <div class="small fw-semibold">Semester</div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-6">
+                    <div class="p-3 bg-white rounded-3 border">
+                        <div class="fw-bold text-primary mb-1">3</div>
+                        <div class="small fw-semibold">Subject</div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-6">
+                    <div class="p-3 bg-white rounded-3 border">
+                        <div class="fw-bold text-primary mb-1">4</div>
+                        <div class="small fw-semibold">Assessment</div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-6">
+                    <div class="p-3 bg-white rounded-3 border">
+                        <div class="fw-bold text-primary mb-1">5</div>
+                        <div class="small fw-semibold">AI Prediction</div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-6">
+                    <div class="p-3 bg-white rounded-3 border">
+                        <div class="fw-bold text-success mb-1">6</div>
+                        <div class="small fw-semibold">Action Plan</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

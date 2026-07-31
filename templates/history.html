@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+{% block title %}Prediction History | GTU AI System{% endblock %}
+
+{% block content %}
+<div class="container py-3">
+
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
+        <div>
+            <h2 class="fw-bold mb-1"><i class="fa-solid fa-clock-rotate-left text-primary me-2"></i>Prediction History Log</h2>
+            <p class="text-muted-custom small mb-0">View, search, filter, and manage previously saved student exam readiness predictions.</p>
+        </div>
+        <button class="btn btn-saas-secondary btn-sm" id="btnRefreshHistory">
+            <i class="fa-solid fa-rotate-right me-1"></i> Refresh Logs
+        </button>
+    </div>
+
+    <!-- Filter & Search Bar -->
+    <div class="saas-card mb-4 p-3">
+        <div class="row g-3 align-items-center">
+            <div class="col-md-3">
+                <div class="input-group">
+                    <span class="input-group-text bg-white"><i class="fa-solid fa-magnifying-glass text-muted"></i></span>
+                    <input type="text" class="form-control" id="searchHistory" placeholder="Search subject or dept...">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <select class="form-select" id="filterStage">
+                    <option value="">All Assessment Stages</option>
+                    <option value="Before Mid-1">Before Mid-1</option>
+                    <option value="After Mid-1">After Mid-1</option>
+                    <option value="After Mid-2">After Mid-2</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <select class="form-select" id="filterCategory">
+                    <option value="">All Categories</option>
+                    <option value="Excellent">Excellent</option>
+                    <option value="Very Good">Very Good</option>
+                    <option value="Good">Good</option>
+                    <option value="Average">Average</option>
+                    <option value="At Risk">At Risk</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <select class="form-select" id="sortHistory">
+                    <option value="newest">Newest First</option>
+                    <option value="oldest">Oldest First</option>
+                    <option value="pass_high">Highest Pass Prob</option>
+                    <option value="pass_low">Lowest Pass Prob</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- History Data Table -->
+    <div class="saas-card p-0 overflow-hidden">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0" id="historyTable">
+                <thead class="bg-light">
+                    <tr class="small text-muted text-uppercase">
+                        <th class="ps-3 py-3">Date</th>
+                        <th>Department & Sem</th>
+                        <th>Subject</th>
+                        <th>Stage</th>
+                        <th>Pass Prob</th>
+                        <th>Grade</th>
+                        <th>Category</th>
+                        <th class="pe-3 text-end">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="historyTbody">
+                    <!-- Loaded dynamically via JS -->
+                </tbody>
+            </table>
+        </div>
+        <div class="text-center py-5 d-none" id="historyEmptyState">
+            <i class="fa-solid fa-folder-open text-muted fa-3x mb-3"></i>
+            <h6 class="fw-bold text-dark">No Prediction Logs Found</h6>
+            <p class="text-muted-custom small mb-3">You haven't generated any readiness predictions yet.</p>
+            <a href="{{ url_for('predict_page') }}" class="btn btn-saas-primary btn-sm">
+                <i class="fa-solid fa-plus me-1"></i> Create First Prediction
+            </a>
+        </div>
+    </div>
+
+</div>
+
+<!-- Details Modal -->
+<div class="modal fade" id="logModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content rounded-4 border-0 shadow">
+            <div class="modal-header border-0 pb-0">
+                <h5 class="modal-title fw-bold" id="modalSubject">Subject Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body p-4" id="modalBody">
+                <!-- Dynamically populated -->
+            </div>
+            <div class="modal-footer border-0 pt-0">
+                <button class="btn btn-sm btn-outline-secondary" onclick="window.print()">
+                    <i class="fa-solid fa-print me-1"></i> Print Log
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/history.js') }}"></script>
+{% endblock %}

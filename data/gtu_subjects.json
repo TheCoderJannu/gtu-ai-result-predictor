@@ -1,0 +1,300 @@
+{
+  "Computer Engineering": {
+    "Semester 1": [
+      {"subject_code": "3110014", "subject_name": "Mathematics-1", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3110018", "subject_name": "Physics", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"},
+      {"subject_code": "3110005", "subject_name": "Basic Electrical Engineering", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3110007", "subject_name": "Environmental Sciences", "credits": 3, "internal_marks": 30, "external_marks": 70, "difficulty": "Easy"},
+      {"subject_code": "3110013", "subject_name": "Engineering Graphics & Design", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"}
+    ],
+    "Semester 2": [
+      {"subject_code": "3110015", "subject_name": "Mathematics-2", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"},
+      {"subject_code": "3110003", "subject_name": "Programming for Problem Solving", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3110016", "subject_name": "Basic Electronics", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3110012", "subject_name": "Workshop/Manufacturing Practices", "credits": 3, "internal_marks": 30, "external_marks": 70, "difficulty": "Easy"},
+      {"subject_code": "3110002", "subject_name": "English", "credits": 2, "internal_marks": 30, "external_marks": 70, "difficulty": "Easy"}
+    ],
+    "Semester 3": [
+      {"subject_code": "3130702", "subject_name": "Data Structures", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"},
+      {"subject_code": "3130703", "subject_name": "Database Management Systems", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3130704", "subject_name": "Digital Fundamentals", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3130004", "subject_name": "Effective Technical Communication", "credits": 3, "internal_marks": 30, "external_marks": 70, "difficulty": "Easy"},
+      {"subject_code": "3130006", "subject_name": "Probability & Statistics", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"}
+    ],
+    "Semester 4": [
+      {"subject_code": "3140702", "subject_name": "Operating System", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"},
+      {"subject_code": "3140705", "subject_name": "Object Oriented Programming - C++", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3140708", "subject_name": "Computer Organization & Architecture", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"},
+      {"subject_code": "3140709", "subject_name": "Discrete Mathematics", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"},
+      {"subject_code": "3140011", "subject_name": "Principles of Economics & Management", "credits": 3, "internal_marks": 30, "external_marks": 70, "difficulty": "Easy"}
+    ],
+    "Semester 5": [
+      {"subject_code": "3150703", "subject_name": "Analysis & Design of Algorithms", "credits": 5, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"},
+      {"subject_code": "3150709", "subject_name": "Professional Ethics & Human Values", "credits": 3, "internal_marks": 30, "external_marks": 70, "difficulty": "Easy"},
+      {"subject_code": "3150710", "subject_name": "Computer Networks", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3150711", "subject_name": "Software Engineering", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3150712", "subject_name": "Cyber Security", "credits": 3, "internal_marks": 30, "external_marks": 70, "difficulty": "Easy"}
+    ],
+    "Semester 6": [
+      {"subject_code": "3160707", "subject_name": "Advanced Java Programming", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3160713", "subject_name": "Web Technology", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3160714", "subject_name": "Data Analysis & Visualization", "credits": 3, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3160704", "subject_name": "Theory of Computation", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"},
+      {"subject_code": "3160715", "subject_name": "Agile Software Development", "credits": 3, "internal_marks": 30, "external_marks": 70, "difficulty": "Easy"}
+    ],
+    "Semester 7": [
+      {"subject_code": "3170701", "subject_name": "Compiler Design", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"},
+      {"subject_code": "3170710", "subject_name": "Information & Network Security", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"},
+      {"subject_code": "3170715", "subject_name": "Machine Learning", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"},
+      {"subject_code": "3170718", "subject_name": "Cloud Computing", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3170001", "subject_name": "Project-1", "credits": 6, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"}
+    ],
+    "Semester 8": [
+      {"subject_code": "3180701", "subject_name": "Artificial Intelligence", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"},
+      {"subject_code": "3180702", "subject_name": "Big Data Analytics", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3180703", "subject_name": "Internet of Things", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3180001", "subject_name": "Project-2", "credits": 8, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"}
+    ]
+  },
+  "Information Technology": {
+    "Semester 1": [
+      {"subject_code": "3110014", "subject_name": "Mathematics-1", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3110005", "subject_name": "Basic Electrical Engineering", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3110013", "subject_name": "Engineering Graphics & Design", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3110007", "subject_name": "Environmental Sciences", "credits": 3, "internal_marks": 30, "external_marks": 70, "difficulty": "Easy"}
+    ],
+    "Semester 2": [
+      {"subject_code": "3110015", "subject_name": "Mathematics-2", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"},
+      {"subject_code": "3110018", "subject_name": "Physics", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"},
+      {"subject_code": "3110003", "subject_name": "Programming for Problem Solving", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3110016", "subject_name": "Basic Electronics", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3110002", "subject_name": "English", "credits": 2, "internal_marks": 30, "external_marks": 70, "difficulty": "Easy"}
+    ],
+    "Semester 3": [
+      {"subject_code": "3130702", "subject_name": "Data Structures", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"},
+      {"subject_code": "3131101", "subject_name": "IT Infrastructure & Management", "credits": 3, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3131004", "subject_name": "Digital Electronics", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3130004", "subject_name": "Effective Technical Communication", "credits": 3, "internal_marks": 30, "external_marks": 70, "difficulty": "Easy"}
+    ],
+    "Semester 4": [
+      {"subject_code": "3140705", "subject_name": "Object Oriented Programming - Java", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3141102", "subject_name": "Operating System Concepts", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"},
+      {"subject_code": "3141103", "subject_name": "Computer Networks", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3140703", "subject_name": "Database Management Systems", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"}
+    ],
+    "Semester 5": [
+      {"subject_code": "3151103", "subject_name": "Computer Networks", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3151105", "subject_name": "Software Engineering", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3151108", "subject_name": "Python Programming", "credits": 3, "internal_marks": 30, "external_marks": 70, "difficulty": "Easy"},
+      {"subject_code": "3151109", "subject_name": "Formal Languages & Automata Theory", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"}
+    ],
+    "Semester 6": [
+      {"subject_code": "3161101", "subject_name": "Cyber Security & Laws", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Easy"},
+      {"subject_code": "3160713", "subject_name": "Web Technology", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3161104", "subject_name": "Mobile Computing", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3161105", "subject_name": "Data Warehousing & Mining", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"}
+    ],
+    "Semester 7": [
+      {"subject_code": "3171101", "subject_name": "Data Mining & Business Intelligence", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"},
+      {"subject_code": "3171104", "subject_name": "Mobile Application Development", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3171106", "subject_name": "Information Retrieval", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3170001", "subject_name": "Project-1", "credits": 6, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"}
+    ],
+    "Semester 8": [
+      {"subject_code": "3181101", "subject_name": "Big Data Analytics", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"},
+      {"subject_code": "3181105", "subject_name": "Internet of Things", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3181108", "subject_name": "Distributed Systems", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"},
+      {"subject_code": "3180001", "subject_name": "Project-2", "credits": 8, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"}
+    ]
+  },
+  "Mechanical Engineering": {
+    "Semester 1": [
+      {"subject_code": "3110006", "subject_name": "Basic Mechanical Engineering", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3110014", "subject_name": "Mathematics-1", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3110013", "subject_name": "Engineering Graphics & Design", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3110018", "subject_name": "Physics", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"}
+    ],
+    "Semester 2": [
+      {"subject_code": "3110015", "subject_name": "Mathematics-2", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"},
+      {"subject_code": "3110003", "subject_name": "Programming for Problem Solving", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3110007", "subject_name": "Environmental Sciences", "credits": 3, "internal_marks": 30, "external_marks": 70, "difficulty": "Easy"},
+      {"subject_code": "3110012", "subject_name": "Workshop Practices", "credits": 3, "internal_marks": 30, "external_marks": 70, "difficulty": "Easy"}
+    ],
+    "Semester 3": [
+      {"subject_code": "3131904", "subject_name": "Material Science & Metallurgy", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3131905", "subject_name": "Engineering Thermodynamics", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"},
+      {"subject_code": "3131906", "subject_name": "Kinematics of Machines", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"},
+      {"subject_code": "3131908", "subject_name": "Manufacturing Processes-1", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"}
+    ],
+    "Semester 4": [
+      {"subject_code": "3141901", "subject_name": "Mechanical Measurement & Metrology", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3141906", "subject_name": "Fluid Mechanics & Hydraulic Machines", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"},
+      {"subject_code": "3141907", "subject_name": "Applied Thermodynamics", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"},
+      {"subject_code": "3141908", "subject_name": "Manufacturing Processes-2", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"}
+    ],
+    "Semester 5": [
+      {"subject_code": "3151908", "subject_name": "Heat Transfer", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"},
+      {"subject_code": "3151910", "subject_name": "Dynamics of Machinery", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"},
+      {"subject_code": "3151912", "subject_name": "Machine Design-1", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"},
+      {"subject_code": "3151913", "subject_name": "Internal Combustion Engines", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"}
+    ],
+    "Semester 6": [
+      {"subject_code": "3161901", "subject_name": "Computer Aided Design (CAD)", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3161909", "subject_name": "Design of Machine Elements", "credits": 5, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"},
+      {"subject_code": "3161910", "subject_name": "Operations Research", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3161911", "subject_name": "Production Technology", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"}
+    ],
+    "Semester 7": [
+      {"subject_code": "3171903", "subject_name": "Computer Aided Manufacturing (CAM)", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3171910", "subject_name": "Refrigeration & Air Conditioning", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"},
+      {"subject_code": "3171912", "subject_name": "Power Plant Engineering", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3170001", "subject_name": "Project-1", "credits": 6, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"}
+    ],
+    "Semester 8": [
+      {"subject_code": "3181901", "subject_name": "Renewable Energy Engineering", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3181903", "subject_name": "Automobile Engineering", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3181905", "subject_name": "Industrial Engineering", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Easy"},
+      {"subject_code": "3180001", "subject_name": "Project-2", "credits": 8, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"}
+    ]
+  },
+  "Civil Engineering": {
+    "Semester 1": [
+      {"subject_code": "3110004", "subject_name": "Basic Civil Engineering", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3110013", "subject_name": "Engineering Graphics & Design", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3110014", "subject_name": "Mathematics-1", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3110018", "subject_name": "Physics", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"}
+    ],
+    "Semester 2": [
+      {"subject_code": "3110015", "subject_name": "Mathematics-2", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"},
+      {"subject_code": "3110003", "subject_name": "Programming for Problem Solving", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3110007", "subject_name": "Environmental Sciences", "credits": 3, "internal_marks": 30, "external_marks": 70, "difficulty": "Easy"},
+      {"subject_code": "3110012", "subject_name": "Workshop Practices", "credits": 3, "internal_marks": 30, "external_marks": 70, "difficulty": "Easy"}
+    ],
+    "Semester 3": [
+      {"subject_code": "3130606", "subject_name": "Mechanics of Solids", "credits": 5, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"},
+      {"subject_code": "3130607", "subject_name": "Surveying", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3130608", "subject_name": "Fluid Mechanics", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"},
+      {"subject_code": "3130609", "subject_name": "Building Construction & Materials", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Easy"}
+    ],
+    "Semester 4": [
+      {"subject_code": "3140601", "subject_name": "Concrete Technology", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3140603", "subject_name": "Structural Analysis-1", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"},
+      {"subject_code": "3140604", "subject_name": "Advanced Surveying", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3140605", "subject_name": "Transportation Engineering", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"}
+    ],
+    "Semester 5": [
+      {"subject_code": "3150608", "subject_name": "Soil Mechanics & Geotechnical Engg", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"},
+      {"subject_code": "3150611", "subject_name": "Hydrology & Water Resources Engg", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3150612", "subject_name": "Structural Analysis-2", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"}
+    ],
+    "Semester 6": [
+      {"subject_code": "3160610", "subject_name": "Design of Steel Structures", "credits": 5, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"},
+      {"subject_code": "3160612", "subject_name": "Environmental Engineering", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3160613", "subject_name": "Foundation Engineering", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"}
+    ],
+    "Semester 7": [
+      {"subject_code": "3170609", "subject_name": "Design of Reinforced Concrete Structures", "credits": 5, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"},
+      {"subject_code": "3170614", "subject_name": "Highway & Traffic Engineering", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3170615", "subject_name": "Irrigation Engineering", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3170001", "subject_name": "Project-1", "credits": 6, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"}
+    ],
+    "Semester 8": [
+      {"subject_code": "3180601", "subject_name": "Construction Project Management", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3180603", "subject_name": "Bridge Engineering", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"},
+      {"subject_code": "3180604", "subject_name": "Earthquake Engineering", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"},
+      {"subject_code": "3180001", "subject_name": "Project-2", "credits": 8, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"}
+    ]
+  },
+  "Electrical Engineering": {
+    "Semester 1": [
+      {"subject_code": "3110005", "subject_name": "Basic Electrical Engineering", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3110014", "subject_name": "Mathematics-1", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3110018", "subject_name": "Physics", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"},
+      {"subject_code": "3110007", "subject_name": "Environmental Sciences", "credits": 3, "internal_marks": 30, "external_marks": 70, "difficulty": "Easy"}
+    ],
+    "Semester 2": [
+      {"subject_code": "3110015", "subject_name": "Mathematics-2", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"},
+      {"subject_code": "3110003", "subject_name": "Programming for Problem Solving", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3110016", "subject_name": "Basic Electronics", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3110013", "subject_name": "Engineering Graphics & Design", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"}
+    ],
+    "Semester 3": [
+      {"subject_code": "3130906", "subject_name": "Electrical Circuit Analysis", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"},
+      {"subject_code": "3130908", "subject_name": "Analog Electronics", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3130909", "subject_name": "Electrical Measurements & Instrumentation", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"}
+    ],
+    "Semester 4": [
+      {"subject_code": "3140908", "subject_name": "Electrical Machines-1", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"},
+      {"subject_code": "3140911", "subject_name": "Electromagnetic Field Theory", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"},
+      {"subject_code": "3140912", "subject_name": "Digital Electronics", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"}
+    ],
+    "Semester 5": [
+      {"subject_code": "3150909", "subject_name": "Electrical Power System-1", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"},
+      {"subject_code": "3150911", "subject_name": "Electrical Machines-2", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"},
+      {"subject_code": "3150912", "subject_name": "Microprocessor & Microcontroller", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"}
+    ],
+    "Semester 6": [
+      {"subject_code": "3160912", "subject_name": "Power Electronics-1", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"},
+      {"subject_code": "3160914", "subject_name": "Electrical Switchgear & Protection", "credits": 5, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"},
+      {"subject_code": "3160916", "subject_name": "Testing & Maintenance of Electrical Equipment", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"}
+    ],
+    "Semester 7": [
+      {"subject_code": "3170901", "subject_name": "High Voltage Engineering", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"},
+      {"subject_code": "3170911", "subject_name": "Electric Drives", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"},
+      {"subject_code": "3170912", "subject_name": "Smart Grid Technology", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3170001", "subject_name": "Project-1", "credits": 6, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"}
+    ],
+    "Semester 8": [
+      {"subject_code": "3180901", "subject_name": "Renewable Energy Sources", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3180903", "subject_name": "E-Vehicle Technology", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3180904", "subject_name": "Power Quality & Management", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3180001", "subject_name": "Project-2", "credits": 8, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"}
+    ]
+  },
+  "Electronics & Communication": {
+    "Semester 1": [
+      {"subject_code": "3110016", "subject_name": "Basic Electronics", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3110014", "subject_name": "Mathematics-1", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3110018", "subject_name": "Physics", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"},
+      {"subject_code": "3110005", "subject_name": "Basic Electrical Engineering", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"}
+    ],
+    "Semester 2": [
+      {"subject_code": "3110015", "subject_name": "Mathematics-2", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"},
+      {"subject_code": "3110003", "subject_name": "Programming for Problem Solving", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3110007", "subject_name": "Environmental Sciences", "credits": 3, "internal_marks": 30, "external_marks": 70, "difficulty": "Easy"},
+      {"subject_code": "3110013", "subject_name": "Engineering Graphics & Design", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"}
+    ],
+    "Semester 3": [
+      {"subject_code": "3131004", "subject_name": "Digital Electronics", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3131005", "subject_name": "Signals & Systems", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"},
+      {"subject_code": "3131006", "subject_name": "Network Theory", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"}
+    ],
+    "Semester 4": [
+      {"subject_code": "3141001", "subject_name": "Analog Communication", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3141006", "subject_name": "Microprocessor & Interfacing", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"},
+      {"subject_code": "3141007", "subject_name": "Control Systems", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"}
+    ],
+    "Semester 5": [
+      {"subject_code": "3151004", "subject_name": "Integrated Circuits & Applications", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3151006", "subject_name": "Digital Communication", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"},
+      {"subject_code": "3151007", "subject_name": "Microcontroller & Applications", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"}
+    ],
+    "Semester 6": [
+      {"subject_code": "3161003", "subject_name": "VLSI Design", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"},
+      {"subject_code": "3161007", "subject_name": "Antenna & Wave Propagation", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"},
+      {"subject_code": "3161009", "subject_name": "Digital Signal Processing", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"}
+    ],
+    "Semester 7": [
+      {"subject_code": "3171001", "subject_name": "Microwave Engineering", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"},
+      {"subject_code": "3171005", "subject_name": "Embedded Systems", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3171006", "subject_name": "Satellite Communication", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3170001", "subject_name": "Project-1", "credits": 6, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"}
+    ],
+    "Semester 8": [
+      {"subject_code": "3181001", "subject_name": "Optical Communication", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3181003", "subject_name": "Wireless Communication", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Hard"},
+      {"subject_code": "3181004", "subject_name": "Radar & Navigational Aids", "credits": 4, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"},
+      {"subject_code": "3180001", "subject_name": "Project-2", "credits": 8, "internal_marks": 30, "external_marks": 70, "difficulty": "Medium"}
+    ]
+  }
+}

@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+
+{% block title %}About & ML Architecture | GTU AI System{% endblock %}
+
+{% block content %}
+<div class="container py-3">
+
+    <div class="mb-4">
+        <h2 class="fw-bold mb-1"><i class="fa-solid fa-circle-info text-primary me-2"></i>About & System Architecture</h2>
+        <p class="text-muted-custom small">Technical documentation, machine learning design, and GTU grading standards alignment.</p>
+    </div>
+
+    <div class="row g-4">
+
+        <div class="col-lg-8">
+            
+            <!-- System Overview -->
+            <div class="saas-card mb-4">
+                <h4 class="fw-bold mb-3">Project Overview</h4>
+                <p class="text-muted-custom">
+                    The <strong>AI-Based GTU Student Exam Readiness & Performance Prediction System</strong> provides Gujarat Technological University (GTU) engineering students with early data-driven performance assessments before final GTU theory examinations.
+                </p>
+                <p class="text-muted-custom mb-0">
+                    Built using scikit-learn machine learning classifiers, Flask backend APIs, and an interactive SaaS frontend, the system estimates pass probabilities, official GTU grades (`AA` to `FF`), performance risk categories, and generates domain-specific revision guidance.
+                </p>
+            </div>
+
+            <!-- GTU Grading System Table -->
+            <div class="saas-card mb-4">
+                <h4 class="fw-bold mb-3">Official GTU Grading Scale Alignment</h4>
+                <div class="table-responsive">
+                    <table class="table table-bordered align-middle small mb-0">
+                        <thead class="bg-light">
+                            <tr>
+                                <th>Grade</th>
+                                <th>Marks Range (%)</th>
+                                <th>Grade Description</th>
+                                <th>Performance Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="badge bg-success">AA</span></td>
+                                <td>85% – 100%</td>
+                                <td>Outstanding Mastery</td>
+                                <td>Pass (Excellent)</td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge bg-success">AB</span></td>
+                                <td>75% – 84%</td>
+                                <td>Excellent</td>
+                                <td>Pass (Excellent)</td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge bg-primary">BB</span></td>
+                                <td>65% – 74%</td>
+                                <td>Very Good</td>
+                                <td>Pass (Very Good)</td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge bg-primary">BC</span></td>
+                                <td>55% – 64%</td>
+                                <td>Good</td>
+                                <td>Pass (Good)</td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge bg-warning text-dark">CC</span></td>
+                                <td>45% – 54%</td>
+                                <td>Average</td>
+                                <td>Pass (Average)</td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge bg-warning text-dark">CD</span></td>
+                                <td>40% – 44%</td>
+                                <td>Below Average</td>
+                                <td>Pass (Average)</td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge bg-danger">DD</span></td>
+                                <td>35% – 39%</td>
+                                <td>Marginal Pass</td>
+                                <td>Pass (At Risk)</td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge bg-danger">FF</span></td>
+                                <td>&lt; 35%</td>
+                                <td>Fail / Backlog</td>
+                                <td>Fail (At Risk)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Machine Learning Pipeline -->
+            <div class="saas-card mb-4">
+                <h4 class="fw-bold mb-3">Machine Learning Pipeline Architecture</h4>
+                <p class="text-muted-custom small">
+                    The platform uses a single unified multi-class classifier pipeline trained on 7,000 realistic GTU student records:
+                </p>
+                <ul class="text-muted-custom small ps-3">
+                    <li><strong>Categorical Preprocessing:</strong> `OneHotEncoder(handle_unknown='ignore')` for Department, Semester, Subject, and Assessment Stage.</li>
+                    <li><strong>Numerical Preprocessing:</strong> `SimpleImputer(strategy='constant', fill_value=-1.0)` and `StandardScaler()` for Attendance, SPI, Study Hours, Backlogs, Mid-1, and Mid-2.</li>
+                    <li><strong>Classifier Selection:</strong> Trained and evaluated `RandomForestClassifier`, `ExtraTreesClassifier`, and `HistGradientBoostingClassifier`. Selected `HistGradientBoostingClassifier` based on cross-validated F1 score (~69.86% multi-class accuracy across 8 fine-grained GTU grades).</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="col-lg-4">
+            
+            <div class="saas-card mb-4">
+                <h5 class="fw-bold mb-3">Technology Stack</h5>
+                <ul class="list-unstyled small d-flex flex-column gap-2 mb-0">
+                    <li class="d-flex justify-content-between">
+                        <span class="text-muted">Backend Engine:</span>
+                        <span class="fw-semibold">Python 3.11 / Flask</span>
+                    </li>
+                    <li class="d-flex justify-content-between">
+                        <span class="text-muted">Machine Learning:</span>
+                        <span class="fw-semibold">Scikit-Learn / Joblib</span>
+                    </li>
+                    <li class="d-flex justify-content-between">
+                        <span class="text-muted">Data Store:</span>
+                        <span class="fw-semibold">SQLite Database</span>
+                    </li>
+                    <li class="d-flex justify-content-between">
+                        <span class="text-muted">Data Processing:</span>
+                        <span class="fw-semibold">Pandas & NumPy</span>
+                    </li>
+                    <li class="d-flex justify-content-between">
+                        <span class="text-muted">UI Framework:</span>
+                        <span class="fw-semibold">Bootstrap 5</span>
+                    </li>
+                    <li class="d-flex justify-content-between">
+                        <span class="text-muted">Design Aesthetic:</span>
+                        <span class="fw-semibold">Stripe / Linear Light</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="saas-card">
+                <h5 class="fw-bold mb-3">Future Roadmap</h5>
+                <ul class="text-muted-custom small ps-3 mb-0">
+                    <li>Integration with GTU University Result API portal.</li>
+                    <li>Exportable PDF Performance Counseling Reports.</li>
+                    <li>Faculty analytics portal for batch-level vulnerability monitoring.</li>
+                </ul>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

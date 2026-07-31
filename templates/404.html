@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Page Not Found | GTU AI System{% endblock %}
+
+{% block content %}
+<div class="container py-5 text-center my-5">
+    <div class="saas-card max-w-lg mx-auto py-5 px-4" style="max-width: 500px;">
+        <h1 class="display-1 fw-bold text-primary mb-2">404</h1>
+        <h4 class="fw-bold text-dark mb-3">Page Not Found</h4>
+        <p class="text-muted-custom small mb-4">
+            The page or resource you are looking for does not exist or has been moved.
+        </p>
+        <div class="d-flex justify-content-center gap-3">
+            <a href="{{ url_for('home') }}" class="btn btn-saas-secondary btn-sm">
+                <i class="fa-solid fa-house me-1"></i> Back to Home
+            </a>
+            <a href="{{ url_for('predict_page') }}" class="btn btn-saas-primary btn-sm">
+                <i class="fa-solid fa-bolt me-1"></i> Predict Readiness
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

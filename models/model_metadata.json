@@ -1,0 +1,32 @@
+{
+  "version": "1.0.0",
+  "model_name": "HistGradientBoostingClassifier",
+  "training_date": "2026-07-23 14:39:08",
+  "accuracy": 0.6986,
+  "precision_macro": 0.614,
+  "recall_macro": 0.6023,
+  "f1_macro": 0.603,
+  "cv_macro_f1": 0.6205,
+  "features": [
+    "Department",
+    "Semester",
+    "Subject",
+    "Assessment Stage",
+    "Attendance",
+    "SPI",
+    "Study Hours",
+    "Backlogs",
+    "Mid1",
+    "Mid2"
+  ],
+  "target_classes": [
+    "AA",
+    "AB",
+    "BB",
+    "BC",
+    "CC",
+    "CD",
+    "DD",
+    "FF"
+  ]
+}

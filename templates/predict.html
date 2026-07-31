@@ -1,0 +1,297 @@
+{% extends "base.html" %}
+
+{% block title %}Predict Exam Readiness | GTU AI System{% endblock %}
+
+{% block head %}
+<!-- html2pdf.js for client-side PDF Generation -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="container py-3">
+
+    <!-- Page Title -->
+    <div class="mb-4">
+        <h2 class="fw-bold mb-1"><i class="fa-solid fa-calculator text-primary me-2"></i>GTU Student Exam Readiness Predictor</h2>
+        <p class="text-muted-custom small">Complete the 3-step academic selection flow to generate your AI performance audit.</p>
+    </div>
+
+    <div class="row g-4">
+
+        <!-- LEFT COLUMN: Stepper & Dynamic Input Form -->
+        <div class="col-lg-7">
+            <div class="saas-card">
+                
+                <!-- Stepper Progress Header -->
+                <div class="stepper-header mb-4">
+                    <div class="stepper-step active" id="stepIndicator1">
+                        <span class="step-number">1</span> Department
+                    </div>
+                    <div class="stepper-step" id="stepIndicator2">
+                        <span class="step-number">2</span> Semester
+                    </div>
+                    <div class="stepper-step" id="stepIndicator3">
+                        <span class="step-number">3</span> Subject
+                    </div>
+                </div>
+
+                <form id="predictionForm" onsubmit="return false;">
+
+                    <!-- STEP 1: Department Selection Grid -->
+                    <div class="mb-4" id="step1Container">
+                        <label class="form-label fw-semibold text-dark mb-2">
+                            Step 1: Select Department <span class="text-danger">*</span>
+                        </label>
+                        <div class="row g-3" id="departmentGrid">
+                            <div class="col-6 col-md-4">
+                                <div class="dept-card" data-dept="Computer Engineering">
+                                    <i class="fa-solid fa-laptop-code dept-icon"></i>
+                                    <h6 class="dept-title">Computer Engg</h6>
+                                </div>
+                            </div>
+                            <div class="col-6 col-md-4">
+                                <div class="dept-card" data-dept="Information Technology">
+                                    <i class="fa-solid fa-network-wired dept-icon"></i>
+                                    <h6 class="dept-title">Info Technology</h6>
+                                </div>
+                            </div>
+                            <div class="col-6 col-md-4">
+                                <div class="dept-card" data-dept="Mechanical Engineering">
+                                    <i class="fa-solid fa-gears dept-icon"></i>
+                                    <h6 class="dept-title">Mechanical Engg</h6>
+                                </div>
+                            </div>
+                            <div class="col-6 col-md-4">
+                                <div class="dept-card" data-dept="Civil Engineering">
+                                    <i class="fa-solid fa-building-columns dept-icon"></i>
+                                    <h6 class="dept-title">Civil Engg</h6>
+                                </div>
+                            </div>
+                            <div class="col-6 col-md-4">
+                                <div class="dept-card" data-dept="Electrical Engineering">
+                                    <i class="fa-solid fa-bolt-lightning dept-icon"></i>
+                                    <h6 class="dept-title">Electrical Engg</h6>
+                                </div>
+                            </div>
+                            <div class="col-6 col-md-4">
+                                <div class="dept-card" data-dept="Electronics & Communication">
+                                    <i class="fa-solid fa-microchip dept-icon"></i>
+                                    <h6 class="dept-title">Electronics & Comm</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" id="selectedDepartment" name="department" required>
+                    </div>
+
+                    <!-- STEP 2: Semester Selection Pills -->
+                    <div class="mb-4 opacity-50" id="step2Container" style="pointer-events: none;">
+                        <label class="form-label fw-semibold text-dark mb-2">
+                            Step 2: Select Semester <span class="text-danger">*</span>
+                        </label>
+                        <div class="sem-pills-container" id="semesterPills">
+                            <div class="sem-pill" data-sem="1">Sem 1</div>
+                            <div class="sem-pill" data-sem="2">Sem 2</div>
+                            <div class="sem-pill" data-sem="3">Sem 3</div>
+                            <div class="sem-pill" data-sem="4">Sem 4</div>
+                            <div class="sem-pill" data-sem="5">Sem 5</div>
+                            <div class="sem-pill" data-sem="6">Sem 6</div>
+                            <div class="sem-pill" data-sem="7">Sem 7</div>
+                            <div class="sem-pill" data-sem="8">Sem 8</div>
+                        </div>
+                        <input type="hidden" id="selectedSemester" name="semester" required>
+                    </div>
+
+                    <!-- STEP 3: Searchable Subject Dropdown -->
+                    <div class="mb-4 opacity-50" id="step3Container" style="pointer-events: none;">
+                        <label class="form-label fw-semibold text-dark mb-2">
+                            Step 3: Select GTU Subject <span class="text-danger">*</span>
+                        </label>
+                        <div class="input-group mb-2">
+                            <span class="input-group-text bg-white"><i class="fa-solid fa-magnifying-glass text-muted"></i></span>
+                            <input type="text" class="form-control" id="subjectSearchInput" placeholder="Search subject by name or code..." disabled>
+                        </div>
+                        <select class="form-select border" id="subjectSelect" name="subject" size="4" style="display: none;" required>
+                            <!-- Options populated via AJAX -->
+                        </select>
+                        
+                        <!-- Subject Information Card -->
+                        <div class="info-card mt-3 d-none" id="subjectInfoCard">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <div>
+                                    <span class="badge bg-primary text-white mb-1" id="infoCode">Code</span>
+                                    <h6 class="fw-bold text-dark mb-0" id="infoName">Subject Name</h6>
+                                </div>
+                                <span id="infoDifficulty" class="badge-medium">Medium</span>
+                            </div>
+                            <div class="row g-2 text-center small mt-2 pt-2 border-top">
+                                <div class="col-4">
+                                    <div class="text-muted">Credits</div>
+                                    <div class="fw-bold" id="infoCredits">4</div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="text-muted">Internal</div>
+                                    <div class="fw-bold" id="infoInternal">30 Marks</div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="text-muted">External</div>
+                                    <div class="fw-bold" id="infoExternal">70 Marks</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <!-- Assessment Stage Segmented Control -->
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold text-dark mb-2">
+                            Assessment Stage <span class="text-danger">*</span>
+                        </label>
+                        <div class="segmented-control" id="stageSegmentedControl">
+                            <div class="segmented-option active" data-stage="Before Mid-1">Before Mid-1</div>
+                            <div class="segmented-option" data-stage="After Mid-1">After Mid-1</div>
+                            <div class="segmented-option" data-stage="After Mid-2">After Mid-2</div>
+                        </div>
+                        <input type="hidden" id="selectedStage" name="assessment_stage" value="Before Mid-1">
+                    </div>
+
+                    <!-- Numerical Input Fields -->
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold text-dark small">Attendance % <span class="text-danger">*</span></label>
+                            <input type="number" step="0.1" min="0" max="100" class="form-control" id="inputAttendance" name="attendance" placeholder="e.g. 82.5" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold text-dark small">Last Semester SPI <span class="text-danger">*</span></label>
+                            <input type="number" step="0.01" min="0" max="10" class="form-control" id="inputSpi" name="spi" placeholder="e.g. 7.50" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold text-dark small">Weekly Study Hours <span class="text-danger">*</span></label>
+                            <input type="number" step="0.5" min="0" max="100" class="form-control" id="inputStudyHours" name="study_hours" placeholder="e.g. 16.0" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold text-dark small">Active Backlogs <span class="text-danger">*</span></label>
+                            <input type="number" min="0" max="20" class="form-control" id="inputBacklogs" name="backlogs" placeholder="e.g. 0" required>
+                        </div>
+                        
+                        <!-- Dynamic Mid Marks Fields -->
+                        <div class="col-md-6 d-none" id="mid1Container">
+                            <label class="form-label fw-semibold text-dark small">Mid-1 Marks (Out of 10) <span class="text-danger">*</span></label>
+                            <input type="number" step="0.1" min="0" max="10" class="form-control" id="inputMid1" name="mid1_marks" placeholder="e.g. 7.5">
+                        </div>
+                        <div class="col-md-6 d-none" id="mid2Container">
+                            <label class="form-label fw-semibold text-dark small">Mid-2 Marks (Out of 20) <span class="text-danger">*</span></label>
+                            <input type="number" step="0.1" min="0" max="20" class="form-control" id="inputMid2" name="mid2_marks" placeholder="e.g. 15.0">
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="button" class="btn btn-saas-primary w-100 py-3 text-center justify-content-center" id="btnPredict">
+                        <span id="btnText"><i class="fa-solid fa-brain me-2"></i> Predict Exam Readiness</span>
+                        <div class="d-none align-items-center gap-2" id="btnSpinner">
+                            <div class="spinner-saas"></div>
+                            <span>Analyzing Academic Performance...</span>
+                        </div>
+                    </button>
+
+                </form>
+            </div>
+        </div>
+
+        <!-- RIGHT COLUMN: Real-time Result Dashboard -->
+        <div class="col-lg-5">
+            
+            <!-- Initial Empty State Placeholder -->
+            <div class="saas-card text-center py-5" id="resultPlaceholder">
+                <i class="fa-solid fa-chart-line text-muted fa-3x mb-3"></i>
+                <h5 class="fw-bold text-dark">AI Result Dashboard</h5>
+                <p class="text-muted-custom small px-3">
+                    Complete the 3-step selection flow on the left and click <strong>Predict Exam Readiness</strong> to view pass probability and analysis.
+                </p>
+            </div>
+
+            <!-- Result Dashboard Card (Initially Hidden) -->
+            <div class="saas-card d-none fade-in" id="resultCard">
+                <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom">
+                    <h5 class="fw-bold mb-0">Prediction Assessment</h5>
+                    <span class="badge bg-light text-dark border" id="resultStageBadge">Stage</span>
+                </div>
+
+                <!-- Export & Print Actions Bar -->
+                <div class="d-flex justify-content-end gap-2 mb-3 no-print">
+                    <button class="btn btn-sm btn-outline-secondary" id="btnPrintReport" title="Print Report">
+                        <i class="fa-solid fa-print me-1"></i> Print
+                    </button>
+                    <button class="btn btn-sm btn-outline-primary" id="btnDownloadPdf" title="Download PDF Report">
+                        <i class="fa-solid fa-file-pdf me-1"></i> Download PDF
+                    </button>
+                </div>
+
+                <div id="pdfReportContent">
+                    <!-- Report Header Branding for PDF/Print -->
+                    <div class="d-none d-print-block text-center mb-3 pb-2 border-bottom">
+                        <h4 class="fw-bold mb-0">GTU AI Readiness & Performance Report</h4>
+                        <div class="small text-muted">Generated via GTU Student Exam Readiness System</div>
+                    </div>
+
+                    <!-- Pass Probability & Grade Overview -->
+                    <div class="row align-items-center mb-4 text-center">
+                        <div class="col-6">
+                            <div class="gauge-container">
+                                <svg width="160" height="160" viewBox="0 0 160 160">
+                                    <circle cx="80" cy="80" r="65" stroke="#E2E8F0" stroke-width="12" fill="none" />
+                                    <circle id="gaugeArc" cx="80" cy="80" r="65" stroke="#2563EB" stroke-width="12" fill="none"
+                                            stroke-dasharray="408.4" stroke-dashoffset="40.8" stroke-linecap="round"
+                                            transform="rotate(-90 80 80)" style="transition: stroke-dashoffset 1s ease;" />
+                                </svg>
+                                <div class="gauge-text">
+                                    <div class="gauge-val" id="resPassProb">92%</div>
+                                    <div class="gauge-lbl">Pass Probability</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="text-muted small mb-1 fw-semibold">EXPECTED GTU GRADE</div>
+                            <div id="resGradeBadge" class="grade-badge grade-AA mb-2">AA</div>
+                            <div class="small fw-semibold text-muted" id="resCategory">Excellent</div>
+                            <div class="small text-muted opacity-75 mt-1" id="resConfidence">Confidence: 91.5%</div>
+                        </div>
+                    </div>
+
+                    <!-- Why AI Predicted This (Contributing Factors) -->
+                    <div class="mb-4 p-3 bg-light rounded-3 border">
+                        <h6 class="fw-bold mb-2 small text-uppercase text-muted"><i class="fa-solid fa-list-check me-1"></i> Why AI Predicted This</h6>
+                        <div class="d-flex flex-wrap gap-2" id="resFactorsContainer">
+                            <!-- Factors dynamically inserted -->
+                        </div>
+                    </div>
+
+                    <!-- Strengths & Weaknesses -->
+                    <div class="mb-4">
+                        <h6 class="fw-bold small text-uppercase text-muted mb-2"><i class="fa-solid fa-thumbs-up text-success me-1"></i> Key Strengths</h6>
+                        <ul class="small ps-3 mb-3 text-muted-custom" id="resStrengthsList"></ul>
+
+                        <h6 class="fw-bold small text-uppercase text-muted mb-2"><i class="fa-solid fa-triangle-exclamation text-warning me-1"></i> Potential Weaknesses</h6>
+                        <ul class="small ps-3 mb-0 text-muted-custom" id="resWeaknessesList"></ul>
+                    </div>
+
+                    <!-- Subject Specific Recommendations -->
+                    <div class="p-3 bg-primary-subtle rounded-3 border border-primary-subtle">
+                        <h6 class="fw-bold text-primary small text-uppercase mb-2"><i class="fa-solid fa-lightbulb me-1"></i> Actionable GTU Revision Topics</h6>
+                        <ul class="small ps-3 mb-0 text-primary-emphasis" id="resRecommendationsList"></ul>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/dynamic_form.js') }}"></script>
+<script src="{{ url_for('static', filename='js/predictor.js') }}"></script>
+{% endblock %}
