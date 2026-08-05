@@ -113,3 +113,7 @@ Access the application in your browser at: `http://127.0.0.1:5000`
 - **Phase 3: Flask REST APIs & Backend Engine** — Completed & Verified.
 - **Phase 4: SaaS Frontend UI & Dynamic Stepper Dashboard** — Completed & Verified.
 - **Phase 5: System Integration, PDF Export & Final Polish** — Completed & Verified.
+
+## developed by
+
+-------------JANHVI SUTHAR-------------------
