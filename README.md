@@ -24,7 +24,7 @@ Designed after modern light-themed SaaS platforms (**Stripe, Linear, Vercel, Cle
 ---
 
 ## 🛠️ Tech Stack
-
+  
 - **Backend**: Python 3.11, Flask REST APIs, SQLite Database
 - **Machine Learning**: Scikit-Learn (`HistGradientBoostingClassifier`, `RandomForestClassifier`), Pandas, NumPy, Joblib
 - **Frontend**: HTML5, Vanilla CSS (Custom Light SaaS Theme), Bootstrap 5, Font Awesome 6, Vanilla JS, html2pdf.js
