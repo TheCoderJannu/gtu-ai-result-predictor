@@ -18,7 +18,7 @@ app.config.from_object(Config)
 os.makedirs(Config.DATA_DIR, exist_ok=True)
 os.makedirs(Config.MODELS_DIR, exist_ok=True)
 
-# Initialize database schema and subject catalog on app startup
+# Initialize database schema and subject catalog on app startup 
 with app.app_context():
     init_db()
 
