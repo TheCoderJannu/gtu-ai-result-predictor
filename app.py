@@ -1,5 +1,9 @@
 import os
+
+from dotenv import load_dotenv
+from google import genai
 from flask import Flask, jsonify, render_template, request
+
 from config import Config
 from database import (
     delete_prediction_log,
@@ -7,18 +11,55 @@ from database import (
     init_db,
     save_prediction_log,
 )
+
 from utils.predictor import PredictorEngine
 from utils.recommendation import RecommendationEngine
 from utils.subject_service import SubjectService
 
-app = Flask(__name__, static_folder="static", template_folder="templates")
+
+# -----------------------------------------------------------------------------
+# ENVIRONMENT / GEMINI CONFIGURATION
+# -----------------------------------------------------------------------------
+
+load_dotenv()
+
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+
+if not GEMINI_API_KEY:
+    print("[Warning] GEMINI_API_KEY is not configured in .env")
+    gemini_client = None
+else:
+    gemini_client = genai.Client(api_key=GEMINI_API_KEY)
+
+GEMINI_MODEL = "gemini-3.1-flash-lite"
+
+
+# -----------------------------------------------------------------------------
+# FLASK APPLICATION
+# -----------------------------------------------------------------------------
+
+app = Flask(
+    __name__,
+    static_folder="static",
+    template_folder="templates"
+)
+
 app.config.from_object(Config)
 
-# Ensure data and model directories exist
+
+# -----------------------------------------------------------------------------
+# DIRECTORY SETUP
+# -----------------------------------------------------------------------------
+
 os.makedirs(Config.DATA_DIR, exist_ok=True)
 os.makedirs(Config.MODELS_DIR, exist_ok=True)
 
-# Initialize database schema and subject catalog on app startup 
+
+# -----------------------------------------------------------------------------
+# DATABASE INITIALIZATION
+# Initialize database schema and subject catalog on app startup
+# -----------------------------------------------------------------------------
+
 with app.app_context():
     init_db()
 
@@ -60,6 +101,7 @@ def about_page():
 @app.route("/api/status", methods=["GET"])
 def api_status():
     """Application status and API info endpoint."""
+
     return (
         jsonify(
             {
@@ -73,6 +115,7 @@ def api_status():
                     "GET /api/subjects?department={dept}&semester={sem}",
                     "GET /api/subject/{subject_code}",
                     "POST /api/predict",
+                    "POST /api/chat",
                     "GET /api/history",
                     "DELETE /api/history/{id}",
                 ],
@@ -82,26 +125,189 @@ def api_status():
     )
 
 
+# -----------------------------------------------------------------------------
+# GEMINI AI CHATBOT
+# -----------------------------------------------------------------------------
+
+
+@app.route("/api/chat", methods=["POST"])
+def chat():
+    """
+    AI chatbot for GTU students using Google Gemini.
+    """
+
+    # Check Gemini configuration
+    if gemini_client is None:
+        return (
+            jsonify(
+                {
+                    "status": "error",
+                    "message": "Gemini API is not configured. Please check your .env file.",
+                }
+            ),
+            500,
+        )
+
+    # Validate JSON request
+    if not request.is_json:
+        return (
+            jsonify(
+                {
+                    "status": "error",
+                    "message": "Request payload must be valid JSON.",
+                }
+            ),
+            400,
+        )
+
+    data = request.get_json()
+
+    # Get user message
+    user_message = str(data.get("message", "")).strip()
+
+    if not user_message:
+        return (
+            jsonify(
+                {
+                    "status": "error",
+                    "message": "Message cannot be empty.",
+                }
+            ),
+            400,
+        )
+
+    # GTU-specific chatbot instructions
+    prompt = f"""
+You are GTU Student Assistant, an AI chatbot for students of
+Gujarat Technological University (GTU).
+
+Your role is to help students with:
+
+- GTU exam preparation
+- Study planning
+- Subject preparation
+- Programming and technical concepts
+- Exam readiness
+- Study tips
+- Time management
+- General academic questions
+- Understanding difficult technical topics
+
+Rules:
+
+1. Give clear and beginner-friendly answers.
+2. Keep answers practical and easy to understand.
+3. Use examples when helpful.
+4. If the student asks about programming, explain the concept
+   step-by-step.
+5. If the student asks for a study plan, provide a realistic plan.
+6. Do not invent GTU rules, exam dates, results, notifications,
+   or official information.
+7. If you are unsure about current GTU information, tell the student
+   to verify it from the official GTU website.
+8. Do not claim that an AI prediction is an official GTU result.
+9. Be helpful and concise.
+
+Student's question:
+
+{user_message}
+"""
+
+    try:
+
+        response = gemini_client.models.generate_content(
+            model=GEMINI_MODEL,
+            contents=prompt
+        )
+
+        if not response.text:
+            return (
+                jsonify(
+                    {
+                        "status": "error",
+                        "message": "The AI returned an empty response.",
+                    }
+                ),
+                500,
+            )
+
+        return (
+            jsonify(
+                {
+                    "status": "success",
+                    "reply": response.text,
+                }
+            ),
+            200,
+        )
+
+    except Exception as e:
+
+        print(f"[Gemini Error] {str(e)}")
+
+        return (
+            jsonify(
+                {
+                    "status": "error",
+                    "message": "Unable to get a response from the AI right now. Please try again.",
+                }
+            ),
+            500,
+        )
+
+
+# -----------------------------------------------------------------------------
+# DEPARTMENT API
+# -----------------------------------------------------------------------------
+
+
 @app.route("/api/departments", methods=["GET"])
 def get_departments():
     """Retrieve all available GTU departments."""
+
     departments = SubjectService.list_departments()
-    return jsonify({"status": "success", "departments": departments}), 200
+
+    return jsonify(
+        {
+            "status": "success",
+            "departments": departments,
+        }
+    ), 200
+
+
+# -----------------------------------------------------------------------------
+# SEMESTER API
+# -----------------------------------------------------------------------------
 
 
 @app.route("/api/semesters", methods=["GET"])
 def get_semesters():
     """Retrieve supported GTU semesters (1 to 8)."""
+
     semesters = SubjectService.list_semesters()
-    return jsonify({"status": "success", "semesters": semesters}), 200
+
+    return jsonify(
+        {
+            "status": "success",
+            "semesters": semesters,
+        }
+    ), 200
+
+
+# -----------------------------------------------------------------------------
+# SUBJECT LIST API
+# -----------------------------------------------------------------------------
 
 
 @app.route("/api/subjects", methods=["GET"])
 def get_subjects():
     """
     Retrieve subjects filtered by department and semester.
-    Query Params: ?department=Computer Engineering&semester=6
+
+    Query Params:
+    ?department=Computer Engineering&semester=6
     """
+
     department = request.args.get("department", "").strip()
     semester_raw = request.args.get("semester", "").strip()
 
@@ -117,7 +323,9 @@ def get_subjects():
         )
 
     try:
+
         semester = int(semester_raw)
+
         if semester < 1 or semester > 8:
             return (
                 jsonify(
@@ -128,7 +336,9 @@ def get_subjects():
                 ),
                 400,
             )
+
     except ValueError:
+
         return (
             jsonify(
                 {
@@ -139,7 +349,11 @@ def get_subjects():
             400,
         )
 
-    subjects = SubjectService.get_subjects(department, semester)
+    subjects = SubjectService.get_subjects(
+        department,
+        semester
+    )
+
     return (
         jsonify(
             {
@@ -154,10 +368,19 @@ def get_subjects():
     )
 
 
+# -----------------------------------------------------------------------------
+# SINGLE SUBJECT API
+# -----------------------------------------------------------------------------
+
+
 @app.route("/api/subject/<subject_code>", methods=["GET"])
 def get_subject_by_code(subject_code):
     """Retrieve complete details for a single subject by its GTU code."""
-    subject_info = SubjectService.get_subject_info_by_code(subject_code)
+
+    subject_info = SubjectService.get_subject_info_by_code(
+        subject_code
+    )
+
     if not subject_info:
         return (
             jsonify(
@@ -169,15 +392,31 @@ def get_subject_by_code(subject_code):
             404,
         )
 
-    return jsonify({"status": "success", "subject": subject_info}), 200
+    return jsonify(
+        {
+            "status": "success",
+            "subject": subject_info,
+        }
+    ), 200
+
+
+# -----------------------------------------------------------------------------
+# PREDICTION API
+# -----------------------------------------------------------------------------
 
 
 @app.route("/api/predict", methods=["POST"])
 def predict():
     """
-    Predict GTU Student Exam Readiness, Pass Probability, Grade, and AI Analysis.
-    JSON Payload Validation -> PredictorEngine -> RecommendationEngine -> SQLite Log.
+    Predict GTU Student Exam Readiness, Pass Probability, Grade,
+    and AI Analysis.
+
+    JSON Payload Validation ->
+    PredictorEngine ->
+    RecommendationEngine ->
+    SQLite Log.
     """
+
     if not request.is_json:
         return (
             jsonify(
@@ -204,7 +443,12 @@ def predict():
     ]
 
     for field in required_fields:
-        if field not in data or data[field] is None or str(data[field]).strip() == "":
+
+        if (
+            field not in data
+            or data[field] is None
+            or str(data[field]).strip() == ""
+        ):
             return (
                 jsonify(
                     {
@@ -221,7 +465,9 @@ def predict():
 
     # Validate Semester
     try:
+
         semester = int(data["semester"])
+
         if semester < 1 or semester > 8:
             return (
                 jsonify(
@@ -232,7 +478,9 @@ def predict():
                 ),
                 400,
             )
+
     except ValueError:
+
         return (
             jsonify(
                 {
@@ -244,7 +492,12 @@ def predict():
         )
 
     # Validate Assessment Stage
-    valid_stages = ["Before Mid-1", "After Mid-1", "After Mid-2"]
+    valid_stages = [
+        "Before Mid-1",
+        "After Mid-1",
+        "After Mid-2",
+    ]
+
     if stage not in valid_stages:
         return (
             jsonify(
@@ -258,6 +511,7 @@ def predict():
 
     # Validate Numerical Ranges
     try:
+
         attendance = float(data["attendance"])
         spi = float(data["spi"])
         study_hours = float(data["study_hours"])
@@ -308,6 +562,7 @@ def predict():
             )
 
     except ValueError:
+
         return (
             jsonify(
                 {
@@ -318,11 +573,12 @@ def predict():
             400,
         )
 
-    # Validate Mid Marks according to Assessment Stage
+    # Validate Mid Marks
     mid1_marks = data.get("mid1_marks")
     mid2_marks = data.get("mid2_marks")
 
     if stage in ["After Mid-1", "After Mid-2"]:
+
         if mid1_marks is None or str(mid1_marks).strip() == "":
             return (
                 jsonify(
@@ -333,8 +589,11 @@ def predict():
                 ),
                 400,
             )
+
         try:
+
             mid1_val = float(mid1_marks)
+
             if not (0.0 <= mid1_val <= 10.0):
                 return (
                     jsonify(
@@ -345,8 +604,11 @@ def predict():
                     ),
                     400,
                 )
+
             mid1_marks = mid1_val
+
         except ValueError:
+
             return (
                 jsonify(
                     {
@@ -356,10 +618,13 @@ def predict():
                 ),
                 400,
             )
+
     else:
+
         mid1_marks = None
 
     if stage == "After Mid-2":
+
         if mid2_marks is None or str(mid2_marks).strip() == "":
             return (
                 jsonify(
@@ -370,8 +635,11 @@ def predict():
                 ),
                 400,
             )
+
         try:
+
             mid2_val = float(mid2_marks)
+
             if not (0.0 <= mid2_val <= 20.0):
                 return (
                     jsonify(
@@ -382,8 +650,11 @@ def predict():
                     ),
                     400,
                 )
+
             mid2_marks = mid2_val
+
         except ValueError:
+
             return (
                 jsonify(
                     {
@@ -393,13 +664,19 @@ def predict():
                 ),
                 400,
             )
+
     else:
+
         mid2_marks = None
 
-    # Retrieve Subject Information Card Details
-    subject_info = SubjectService.get_subject_info(department, semester, subject)
+    # Retrieve Subject Information
+    subject_info = SubjectService.get_subject_info(
+        department,
+        semester,
+        subject
+    )
 
-    # Format payload for inference engine
+    # Format Payload
     predictor_payload = {
         "department": department,
         "semester": semester,
@@ -414,16 +691,22 @@ def predict():
     }
 
     try:
-        # Run Machine Learning Prediction
-        prediction_result = PredictorEngine.predict(predictor_payload)
 
-        # Generate Strengths, Weaknesses, and Subject Topic Recommendations
+        # Run Machine Learning Prediction
+        prediction_result = PredictorEngine.predict(
+            predictor_payload
+        )
+
+        # Generate Analysis
         analysis = RecommendationEngine.analyze_strengths_and_weaknesses(
             predictor_payload
         )
-        recommendations = RecommendationEngine.get_subject_recommendations(subject)
 
-        # Save Prediction to SQLite Database
+        recommendations = RecommendationEngine.get_subject_recommendations(
+            subject
+        )
+
+        # Save Prediction
         log_payload = {
             "department": department,
             "semester": semester,
@@ -440,6 +723,7 @@ def predict():
             "performance_category": prediction_result["performance_category"],
             "prediction_confidence": prediction_result["confidence_score"],
         }
+
         log_id = save_prediction_log(log_payload)
 
         return (
@@ -463,6 +747,7 @@ def predict():
         )
 
     except Exception as e:
+
         return (
             jsonify(
                 {
@@ -474,13 +759,29 @@ def predict():
         )
 
 
+# -----------------------------------------------------------------------------
+# HISTORY API
+# -----------------------------------------------------------------------------
+
+
 @app.route("/api/history", methods=["GET"])
 def get_history():
     """Retrieve prediction logs history."""
+
     try:
+
         logs = fetch_all_prediction_logs()
-        return jsonify({"status": "success", "count": len(logs), "history": logs}), 200
+
+        return jsonify(
+            {
+                "status": "success",
+                "count": len(logs),
+                "history": logs,
+            }
+        ), 200
+
     except Exception as e:
+
         return (
             jsonify(
                 {
@@ -492,11 +793,19 @@ def get_history():
         )
 
 
+# -----------------------------------------------------------------------------
+# DELETE HISTORY ITEM
+# -----------------------------------------------------------------------------
+
+
 @app.route("/api/history/<int:log_id>", methods=["DELETE"])
 def delete_history_item(log_id):
     """Delete a single prediction history log by ID."""
+
     try:
+
         success = delete_prediction_log(log_id)
+
         if not success:
             return (
                 jsonify(
@@ -517,33 +826,63 @@ def delete_history_item(log_id):
             ),
             200,
         )
+
     except Exception as e:
+
         return (
             jsonify(
                 {
                     "status": "error",
-                    "message": f"Failed to delete history log: {str(e)}",
+                    "message": f"Failed to delete prediction log: {str(e)}",
                 }
             ),
             500,
         )
 
 
+# -----------------------------------------------------------------------------
+# ERROR HANDLERS
+# -----------------------------------------------------------------------------
+
+
 @app.errorhandler(404)
 def not_found(error):
-    # Check if API request or Web Browser request
+
     if request.path.startswith("/api/"):
-        return jsonify({"status": "error", "message": "API endpoint not found."}), 404
+        return jsonify(
+            {
+                "status": "error",
+                "message": "API endpoint not found.",
+            }
+        ), 404
+
     return render_template("404.html"), 404
 
 
 @app.errorhandler(500)
 def internal_server_error(error):
+
     if request.path.startswith("/api/"):
-        return jsonify({"status": "error", "message": "Internal server error."}), 500
+        return jsonify(
+            {
+                "status": "error",
+                "message": "Internal server error.",
+            }
+        ), 500
+
     return render_template("404.html"), 500
 
 
+# -----------------------------------------------------------------------------
+# APPLICATION START
+# -----------------------------------------------------------------------------
+
+
 if __name__ == "__main__":
+
     print("[Flask] Starting GTU AI Backend & Web Platform...")
-    app.run(debug=True, port=5000)
+
+    app.run(
+        debug=True,
+        port=5000
+    )

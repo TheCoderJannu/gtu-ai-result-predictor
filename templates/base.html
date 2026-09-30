@@ -18,6 +18,332 @@
     
     <!-- Custom SaaS Theme CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+    <!-- GTU AI Chatbot CSS -->
+    <style>
+        /* ================================
+           GTU AI CHATBOT
+           ================================ */
+
+        .gtu-chat-button {
+            position: fixed;
+            right: 25px;
+            bottom: 25px;
+            width: 62px;
+            height: 62px;
+            border-radius: 50%;
+            border: none;
+            background: linear-gradient(135deg, #0d6efd, #6f42c1);
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 9999;
+            box-shadow: 0 8px 25px rgba(13, 110, 253, 0.35);
+            transition: all 0.25s ease;
+        }
+
+        .gtu-chat-button:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 12px 30px rgba(13, 110, 253, 0.45);
+        }
+
+        .gtu-chat-button.active {
+            transform: rotate(90deg);
+        }
+
+        .gtu-chat-window {
+            position: fixed;
+            right: 25px;
+            bottom: 100px;
+            width: 390px;
+            max-width: calc(100vw - 30px);
+            height: 560px;
+            max-height: calc(100vh - 130px);
+            background: #ffffff;
+            border-radius: 18px;
+            overflow: hidden;
+            z-index: 9998;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.18);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+
+            display: flex;
+            flex-direction: column;
+
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px) scale(0.96);
+            transform-origin: bottom right;
+            transition: all 0.25s ease;
+        }
+
+        .gtu-chat-window.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+
+        /* Chat Header */
+
+        .gtu-chat-header {
+            background: linear-gradient(135deg, #0d6efd, #6f42c1);
+            color: white;
+            padding: 16px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .gtu-chat-header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .gtu-ai-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.18);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 19px;
+        }
+
+        .gtu-chat-title {
+            font-size: 15px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .gtu-chat-status {
+            font-size: 11px;
+            opacity: 0.85;
+            margin-top: 2px;
+        }
+
+        .gtu-chat-close {
+            width: 34px;
+            height: 34px;
+            border: none;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.12);
+            color: white;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .gtu-chat-close:hover {
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        /* Messages */
+
+        .gtu-chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 18px;
+            background: #f7f8fc;
+            scroll-behavior: smooth;
+        }
+
+        .gtu-message {
+            display: flex;
+            margin-bottom: 14px;
+        }
+
+        .gtu-message.user {
+            justify-content: flex-end;
+        }
+
+        .gtu-message.ai {
+            justify-content: flex-start;
+        }
+
+        .gtu-message-bubble {
+            max-width: 82%;
+            padding: 11px 14px;
+            border-radius: 15px;
+            font-size: 13px;
+            line-height: 1.55;
+            word-wrap: break-word;
+        }
+
+        .gtu-message.user .gtu-message-bubble {
+            background: #0d6efd;
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+
+        .gtu-message.ai .gtu-message-bubble {
+            background: white;
+            color: #252525;
+            border: 1px solid #e7e7e7;
+            border-bottom-left-radius: 4px;
+        }
+
+        .gtu-message-bubble strong {
+            font-weight: 700;
+        }
+
+        /* Welcome message */
+
+        .gtu-welcome {
+            text-align: center;
+            padding: 15px 10px 20px;
+        }
+
+        .gtu-welcome-icon {
+            width: 55px;
+            height: 55px;
+            margin: 0 auto 10px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0d6efd, #6f42c1);
+            color: white;
+            font-size: 23px;
+        }
+
+        .gtu-welcome h6 {
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .gtu-welcome p {
+            color: #777;
+            font-size: 12px;
+            margin-bottom: 0;
+        }
+
+        /* Typing indicator */
+
+        .gtu-typing {
+            display: none;
+            margin-bottom: 14px;
+        }
+
+        .gtu-typing.show {
+            display: flex;
+        }
+
+        .gtu-typing-bubble {
+            background: white;
+            border: 1px solid #e7e7e7;
+            border-radius: 15px;
+            border-bottom-left-radius: 4px;
+            padding: 11px 15px;
+        }
+
+        .gtu-dot {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background: #888;
+            border-radius: 50%;
+            margin: 0 2px;
+            animation: gtuTyping 1.2s infinite;
+        }
+
+        .gtu-dot:nth-child(2) {
+            animation-delay: 0.15s;
+        }
+
+        .gtu-dot:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        @keyframes gtuTyping {
+            0%, 60%, 100% {
+                transform: translateY(0);
+                opacity: 0.4;
+            }
+            30% {
+                transform: translateY(-4px);
+                opacity: 1;
+            }
+        }
+
+        /* Input area */
+
+        .gtu-chat-input-area {
+            padding: 12px;
+            background: white;
+            border-top: 1px solid #e9e9e9;
+        }
+
+        .gtu-chat-form {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .gtu-chat-input {
+            flex: 1;
+            border: 1px solid #dcdcdc;
+            border-radius: 12px;
+            padding: 11px 13px;
+            outline: none;
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+            transition: 0.2s;
+        }
+
+        .gtu-chat-input:focus {
+            border-color: #0d6efd;
+            box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.08);
+        }
+
+        .gtu-chat-send {
+            width: 43px;
+            height: 43px;
+            flex-shrink: 0;
+            border: none;
+            border-radius: 12px;
+            background: #0d6efd;
+            color: white;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .gtu-chat-send:hover {
+            background: #0b5ed7;
+            transform: translateY(-1px);
+        }
+
+        .gtu-chat-send:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .gtu-chat-powered {
+            text-align: center;
+            color: #999;
+            font-size: 9px;
+            margin-top: 7px;
+        }
+
+        /* Mobile */
+
+        @media (max-width: 576px) {
+            .gtu-chat-button {
+                right: 16px;
+                bottom: 16px;
+                width: 56px;
+                height: 56px;
+            }
+
+            .gtu-chat-window {
+                right: 10px;
+                bottom: 82px;
+                width: calc(100vw - 20px);
+                height: calc(100vh - 110px);
+                max-height: none;
+            }
+        }
+    </style>
     
     {% block head %}{% endblock %}
 </head>
@@ -29,9 +355,11 @@
             <a class="navbar-brand" href="{{ url_for('home') }}">
                 <i class="fa-solid fa-graduation-cap"></i> GTU Readiness AI
             </a>
+
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
             <div class="collapse navbar-collapse" id="navbarMain">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-1">
                     <li class="nav-item">
@@ -39,16 +367,19 @@
                             <i class="fa-solid fa-house me-1"></i> Home
                         </a>
                     </li>
+
                     <li class="nav-item">
                         <a class="nav-link nav-link-custom {% if request.endpoint == 'predict_page' %}active{% endif %}" href="{{ url_for('predict_page') }}">
                             <i class="fa-solid fa-chart-line me-1"></i> Predict Readiness
                         </a>
                     </li>
+
                     <li class="nav-item">
                         <a class="nav-link nav-link-custom {% if request.endpoint == 'history_page' %}active{% endif %}" href="{{ url_for('history_page') }}">
                             <i class="fa-solid fa-clock-rotate-left me-1"></i> History
                         </a>
                     </li>
+
                     <li class="nav-item">
                         <a class="nav-link nav-link-custom {% if request.endpoint == 'about_page' %}active{% endif %}" href="{{ url_for('about_page') }}">
                             <i class="fa-solid fa-circle-info me-1"></i> About & Architecture
@@ -68,17 +399,21 @@
     <footer class="footer-custom">
         <div class="container">
             <div class="row gy-4">
+
                 <div class="col-md-5">
                     <div class="d-flex align-items-center gap-2 mb-2">
                         <i class="fa-solid fa-graduation-cap text-primary fa-lg"></i>
                         <span class="fw-bold fs-5 text-dark">GTU Readiness AI</span>
                     </div>
+
                     <p class="text-muted-custom small pe-md-4">
                         An AI-driven educational analytics platform for Gujarat Technological University students. Predict final exam readiness, pass probability, GTU grades, and receive topic-specific revision guidance.
                     </p>
                 </div>
+
                 <div class="col-md-3">
                     <h6 class="fw-semibold text-dark mb-3">Departments Supported</h6>
+
                     <ul class="list-unstyled text-muted-custom small d-flex flex-column gap-1">
                         <li>Computer Engineering</li>
                         <li>Information Technology</li>
@@ -88,18 +423,37 @@
                         <li>Electronics & Communication</li>
                     </ul>
                 </div>
+
                 <div class="col-md-4">
                     <h6 class="fw-semibold text-dark mb-3">Platform Tech Stack</h6>
+
                     <div class="d-flex flex-wrap gap-2">
-                        <span class="badge bg-light text-dark border"><i class="fa-brands fa-python text-primary me-1"></i> Python 3.11</span>
-                        <span class="badge bg-light text-dark border"><i class="fa-solid fa-flask text-success me-1"></i> Flask</span>
-                        <span class="badge bg-light text-dark border"><i class="fa-solid fa-brain text-warning me-1"></i> Scikit-Learn</span>
-                        <span class="badge bg-light text-dark border"><i class="fa-solid fa-database text-info me-1"></i> SQLite</span>
-                        <span class="badge bg-light text-dark border"><i class="fa-brands fa-bootstrap text-purple me-1"></i> Bootstrap 5</span>
+                        <span class="badge bg-light text-dark border">
+                            <i class="fa-brands fa-python text-primary me-1"></i> Python 3.11
+                        </span>
+
+                        <span class="badge bg-light text-dark border">
+                            <i class="fa-solid fa-flask text-success me-1"></i> Flask
+                        </span>
+
+                        <span class="badge bg-light text-dark border">
+                            <i class="fa-solid fa-brain text-warning me-1"></i> Scikit-Learn
+                        </span>
+
+                        <span class="badge bg-light text-dark border">
+                            <i class="fa-solid fa-database text-info me-1"></i> SQLite
+                        </span>
+
+                        <span class="badge bg-light text-dark border">
+                            <i class="fa-brands fa-bootstrap text-purple me-1"></i> Bootstrap 5
+                        </span>
                     </div>
                 </div>
+
             </div>
+
             <hr class="my-4 border-secondary opacity-25">
+
             <div class="d-flex flex-column flex-md-row align-items-center justify-content-between text-muted-custom small">
                 <div>&copy; 2026 GTU AI Exam Readiness System. All rights reserved.</div>
                 <div>Gujarat Technological University (GTU) Academic Analytics</div>
@@ -107,8 +461,327 @@
         </div>
     </footer>
 
+
+    <!-- ==========================================
+         GTU AI CHATBOT
+         ========================================== -->
+
+    <!-- Chat Window -->
+    <div class="gtu-chat-window" id="gtuChatWindow">
+
+        <!-- Header -->
+        <div class="gtu-chat-header">
+
+            <div class="gtu-chat-header-left">
+                <div class="gtu-ai-icon">
+                    <i class="fa-solid fa-robot"></i>
+                </div>
+
+                <div>
+                    <p class="gtu-chat-title">GTU AI Assistant</p>
+                    <div class="gtu-chat-status">
+                        <i class="fa-solid fa-circle" style="font-size: 7px;"></i>
+                        Online
+                    </div>
+                </div>
+            </div>
+
+            <button class="gtu-chat-close" id="gtuChatClose" type="button">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+        </div>
+
+
+        <!-- Messages -->
+        <div class="gtu-chat-messages" id="gtuChatMessages">
+
+            <div class="gtu-welcome">
+                <div class="gtu-welcome-icon">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+
+                <h6>Hi! I'm your GTU AI Assistant 👋</h6>
+
+                <p>
+                    Ask me about GTU exams, preparation, subjects,
+                    study plans, or exam readiness.
+                </p>
+            </div>
+
+            <div class="gtu-message ai">
+                <div class="gtu-message-bubble">
+                    Hello! 👋 I'm your <strong>GTU Student Assistant</strong>.
+                    How can I help you with your exam preparation today?
+                </div>
+            </div>
+
+            <!-- Typing indicator -->
+            <div class="gtu-typing" id="gtuTyping">
+                <div class="gtu-typing-bubble">
+                    <span class="gtu-dot"></span>
+                    <span class="gtu-dot"></span>
+                    <span class="gtu-dot"></span>
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- Input -->
+        <div class="gtu-chat-input-area">
+
+            <form class="gtu-chat-form" id="gtuChatForm">
+
+                <input
+                    type="text"
+                    id="gtuChatInput"
+                    class="gtu-chat-input"
+                    placeholder="Ask your GTU question..."
+                    autocomplete="off"
+                    maxlength="1000"
+                >
+
+                <button
+                    type="submit"
+                    class="gtu-chat-send"
+                    id="gtuChatSend"
+                    title="Send message"
+                >
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+
+            </form>
+
+            <div class="gtu-chat-powered">
+                Powered by Gemini • GTU Student Assistant
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Floating Chat Button -->
+    <button
+        type="button"
+        class="gtu-chat-button"
+        id="gtuChatButton"
+        title="Open GTU AI Assistant"
+        aria-label="Open GTU AI Assistant"
+    >
+        <i class="fa-solid fa-comments"></i>
+    </button>
+
+
     <!-- Bootstrap 5 JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <!-- ==========================================
+         GTU AI CHATBOT JAVASCRIPT
+         ========================================== -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const chatButton = document.getElementById("gtuChatButton");
+            const chatWindow = document.getElementById("gtuChatWindow");
+            const chatClose = document.getElementById("gtuChatClose");
+            const chatForm = document.getElementById("gtuChatForm");
+            const chatInput = document.getElementById("gtuChatInput");
+            const chatMessages = document.getElementById("gtuChatMessages");
+            const chatTyping = document.getElementById("gtuTyping");
+            const chatSend = document.getElementById("gtuChatSend");
+
+
+            /* --------------------------------
+               Open / Close Chat
+               -------------------------------- */
+
+            function openChat() {
+                chatWindow.classList.add("open");
+                chatButton.classList.add("active");
+
+                setTimeout(function () {
+                    chatInput.focus();
+                }, 250);
+            }
+
+            function closeChat() {
+                chatWindow.classList.remove("open");
+                chatButton.classList.remove("active");
+            }
+
+            chatButton.addEventListener("click", function () {
+                if (chatWindow.classList.contains("open")) {
+                    closeChat();
+                } else {
+                    openChat();
+                }
+            });
+
+            chatClose.addEventListener("click", closeChat);
+
+
+            /* --------------------------------
+               Add Message
+               -------------------------------- */
+
+            function addMessage(message, sender) {
+
+                const messageWrapper = document.createElement("div");
+                messageWrapper.className = "gtu-message " + sender;
+
+                const bubble = document.createElement("div");
+                bubble.className = "gtu-message-bubble";
+
+                /*
+                 * Convert simple markdown-style formatting
+                 * into readable HTML.
+                 */
+                let formattedMessage = escapeHtml(message);
+
+                formattedMessage = formattedMessage
+                    .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+                    .replace(/\n/g, "<br>");
+
+                bubble.innerHTML = formattedMessage;
+
+                messageWrapper.appendChild(bubble);
+
+                /*
+                 * Insert before typing indicator
+                 * so the typing animation stays at bottom.
+                 */
+                chatMessages.insertBefore(messageWrapper, chatTyping);
+
+                scrollChatToBottom();
+            }
+
+
+            /* --------------------------------
+               Escape HTML
+               -------------------------------- */
+
+            function escapeHtml(text) {
+                const div = document.createElement("div");
+                div.textContent = text;
+                return div.innerHTML;
+            }
+
+
+            /* --------------------------------
+               Scroll
+               -------------------------------- */
+
+            function scrollChatToBottom() {
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+
+
+            /* --------------------------------
+               Send Message
+               -------------------------------- */
+
+            chatForm.addEventListener("submit", async function (event) {
+
+                event.preventDefault();
+
+                const message = chatInput.value.trim();
+
+                if (!message) {
+                    return;
+                }
+
+                // Show user's message
+                addMessage(message, "user");
+
+                // Clear input
+                chatInput.value = "";
+
+                // Disable input while waiting
+                chatInput.disabled = true;
+                chatSend.disabled = true;
+
+                // Show typing indicator
+                chatTyping.classList.add("show");
+                scrollChatToBottom();
+
+                try {
+
+                    const response = await fetch("/api/chat", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            message: message
+                        })
+                    });
+
+
+                    const data = await response.json();
+
+
+                    // Hide typing indicator
+                    chatTyping.classList.remove("show");
+
+
+                    if (response.ok && data.status === "success") {
+
+                        addMessage(data.reply, "ai");
+
+                    } else {
+
+                        addMessage(
+                            data.message ||
+                            "Sorry, I couldn't process your question right now.",
+                            "ai"
+                        );
+
+                    }
+
+                } catch (error) {
+
+                    console.error("GTU Chatbot Error:", error);
+
+                    chatTyping.classList.remove("show");
+
+                    addMessage(
+                        "Sorry, I couldn't connect to the AI assistant. Please make sure the Flask server is running.",
+                        "ai"
+                    );
+
+                } finally {
+
+                    // Re-enable input
+                    chatInput.disabled = false;
+                    chatSend.disabled = false;
+
+                    chatInput.focus();
+                }
+
+            });
+
+
+            /* --------------------------------
+               Enter key
+               -------------------------------- */
+
+            chatInput.addEventListener("keydown", function (event) {
+
+                if (event.key === "Enter" && !event.shiftKey) {
+                    event.preventDefault();
+                    chatForm.requestSubmit();
+                }
+
+            });
+
+        });
+    </script>
+
+
     {% block scripts %}{% endblock %}
+
 </body>
 </html>
